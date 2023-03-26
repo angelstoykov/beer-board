@@ -1,0 +1,232 @@
+body {
+	margin: 20px 0;
+	padding: 0;
+	background: #3399FF url(images/img01.gif) repeat-y center;
+	font: normal small "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #999999;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	text-transform: lowercase;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+h3 {
+	font-size: 1.4em;
+}
+
+img {
+	border: none;
+}
+
+a {
+	color: #333333;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #000000;
+}
+
+/* Header */
+
+#header {
+	width: 740px;
+	height: 160px;
+	margin: 0 auto;
+}
+
+/* Logo */
+
+#logo {
+	float: left;
+	width: 260px;
+	height: 160px;
+	background: url(images/img02.gif) no-repeat;
+}
+
+#logo h1 {
+	padding: 50px 0 0 20px;
+	letter-spacing: -.05em;
+	font-size: 4em;
+}
+
+#logo h2 {
+	font-size: 1.8em;
+}
+
+#logo a {
+	text-decoration: none;
+	color: #3399FF;
+}
+
+/* Navigation */
+
+#navigation {
+	float: right;
+	width: 431px;
+	height: 50px;
+	margin: 50px 30px 0 0;
+	background: #99CC00 url(images/img05.gif);
+}
+
+#navigation ul {
+	margin: 0;
+	padding: 0 0 0 1em;
+	list-style: none;
+}
+
+#navigation li {
+	display: inline;
+}
+
+#navigation a {
+	display: block;
+	float: left;
+	padding: .5em .7em;
+	text-decoration: none;
+	text-transform: lowercase;
+	letter-spacing: -1px;
+	font-size: 1.5em;
+	color: #FFFFFF;
+}
+
+#navigation a:hover {
+	background: #FF9900;
+}
+
+#navigation .active a {}
+
+/* Content */
+
+#content {
+	width: 740px;
+	margin: 0 auto;
+}
+
+/* Boards */
+
+#boards {
+	float: right;
+	width: 440px;
+	padding: 0 30px 0 0;
+}
+
+.post {
+	margin-bottom: 10px;
+}
+
+.post .title {
+	padding: 0 0 5px 20px;
+	color: #FF8400;
+}
+
+.post .meta {
+	margin-left: 10px;
+	padding: 10px 20px;
+	background: url(images/img06.gif) no-repeat;
+	font-size: smaller;
+}
+
+.post .meta p {
+	margin: 0;
+}
+
+.post .story {
+	padding: 10px 20px;
+	line-height: 180%;
+}
+
+/* Sidebar */
+
+#sidebar {
+	float: left;
+	width: 240px;
+}
+
+/* Boxed */
+
+#sidebar .boxed {
+	width: 240px;
+	padding: 0 0 3em 0;
+	background: #FFCC00 url(images/img04.gif) no-repeat left bottom;
+}
+
+#sidebar .boxed h2 {
+	height: 40px;
+	padding: 10px 0 0 30px;
+	background: url(images/img03.gif) no-repeat;
+	font-size: 2em;
+	color: #FFFFFF;
+}
+
+#sidebar .boxed .content {
+	color: #FFFFFF;
+}
+
+#sidebar .boxed ul {}
+
+#sidebar .boxed li {}
+
+#sidebar .boxed a {
+	text-decoration: none;
+	color: #3399FF;
+}
+
+#sidebar .boxed a:hover {
+	color: #FF9900;
+}
+
+/* Tag Cloud */
+
+#tagcloud {}
+
+#tagcloud .content {
+	padding: 1em;
+	text-align: justify;
+	font-size: .8em;
+}
+
+#tagcloud .content a {
+	color: #FFFFFF;
+}
+
+#tagcloud .content a:hover {
+	color: #3399FF;
+}
+
+/* Footer */
+
+#footer {
+	clear: both;
+	width: 200px;
+	margin: 0 auto;
+	padding: 0 520px 0 20px;
+}
+
+#footer p {
+	color: #FFFFFF;
+}
+
+#footer a {
+	color: #FFFFFF;
+}
+
+/* Custom CSS */
+
+div.form {
+	display: block;
+	text-align: center;
+}
+
+form {
+	display: inline-block;
+	padding-left: 50%;
+}
