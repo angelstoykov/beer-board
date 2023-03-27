@@ -2,23 +2,29 @@ import styles from './EditBoard.module.css';
 
 import * as boardService from '../services/BoardService';
 
-import { useLocation } from "react-router-dom";
+import { useNavigate,  useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
+
+import AddParticipant from './AddParticipant';
 
 const EditBoard = ({
     utils
 }) => {
-    const location = useLocation();
-    const id = location.pathname.split("/").pop();
+    const routeParams = useParams();
+    const id = routeParams._id;
+
+    const navigate = useNavigate();
 
     const [board, setBoard] = useState({});
+    const [addParticipant, setAddParticipant] = useState(false);
+    const [participantsCount, setParticipantsCount] = useState(0);
 
     useEffect(() => {
         boardService.getBoardById(id)
             .then(response => {
-                console.log(response);
                 setBoard(response);
+                setParticipantsCount(response.participants.length);
             })
     }, []);
 
@@ -49,16 +55,40 @@ const EditBoard = ({
     const onSubmitHandler = (e) => {
         e.preventDefault();
         console.log(board);
+        navigate('/');
     }
 
     const onparticipantDeleteClick = (id) => {
         let filteredParticipants = board.participants.filter(p => p._id !== id)
 
         setBoard(board => ({ ...board, participants: filteredParticipants }));
+        setParticipantsCount(filteredParticipants.length)
+    }
+
+    const onAddParticipantClick = () => {
+        setAddParticipant(true);
+        console.log('modal?');
+    }
+
+    const onCloseClick = () => {
+        setAddParticipant(false);
+        console.log('onclose click');
+    }
+
+    const onAddNewParticipant = (e, participant) => {
+        e.preventDefault();
+        console.log('added new participant');
+        console.log(participant);
+
+        setBoard(board => ({...board, participants: [...board.participants, participant]}));
+        console.log(board.participants);
+        setParticipantsCount(board.participants.length)
     }
 
     return (
         <>
+            {addParticipant && <AddParticipant onCloseClick={onCloseClick}
+                                               onAddNewParticipant={onAddNewParticipant} />}
             <form onSubmit={onSubmitHandler}>
                 <div className="form-group">
                     <label htmlFor="name">Board name</label>
@@ -113,7 +143,7 @@ const EditBoard = ({
 
                 <div className="form-group">
                     <label htmlFor="participants">Participants</label>
-                    <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                    <i className="fa fa-plus-circle" aria-hidden="true" data-toggle="modal" data-target="#exampleModal" onClick={onAddParticipantClick}></i>
                     <div className="input-wrapper">
                         {<ul>{board.participants
                             ? board.participants.map(p =>
@@ -123,9 +153,12 @@ const EditBoard = ({
                                 </li>)
                             : ''}</ul>}
                     </div>
-                    <p className="form-error">
-                        Participants should be at least 1! :D
-                    </p>
+                    {participantsCount === 0
+                        ? <p className={styles.formError}>
+                            Participants should be at least 1! :D
+                          </p>
+                        : ''
+                    }
                 </div>
 
                 <div id="form-actions" className={styles.formActions}>

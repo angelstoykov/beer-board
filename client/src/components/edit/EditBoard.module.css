@@ -32,3 +32,8 @@
   .btnMainMargin {
     margin-right: 10px;
   }
+
+  .formError {
+    color: #d9534f;
+    min-height: 20px;
+  }

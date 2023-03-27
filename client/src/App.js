@@ -32,8 +32,8 @@ function App() {
             <Routes>
                 <Route path="/Contact" element={<Contact />} />
                 <Route path="/" element={<Content boards={boards} />} />
-                <Route path="/details/board/:id" element={<BoardDetails utils={utils} />} />
-                <Route path="/edit/board/:id" element={<EditBoard utils={utils} />} />
+                <Route path="/details/board/:_id" element={<BoardDetails utils={utils} />} />
+                <Route path="/edit/board/:_id" element={<EditBoard utils={utils} />} />
                 <Route path="*" element={<h1>404</h1>} />
             </Routes>
 

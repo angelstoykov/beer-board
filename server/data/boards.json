@@ -23,11 +23,11 @@
     },
     "147e5d19-fd57-457c-bf1b-eee6e16ceaad": {
         "_id": "147e5d19-fd57-457c-bf1b-eee6e16ceaad",
-        "name": "Party With Coherent",
+        "name": "Party With Coworkers",
         "isActive": true,
         "beersCount": 101,
         "imageSrc": "https://www.freevector.com/uploads/vector/preview/17923/FreeVector-Party-People-Silhouettes.jpg",
-        "description": "description Party With Coherent",
+        "description": "description Party With Coworkers",
         "participants": [
             {
                 "_id": "2e420ac4-d870-4265-bc21-5abe07fedd7c",

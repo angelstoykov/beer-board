@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
 
 import * as boardService from '../services/BoardService';
+
+import styles from './BoardDetails.module.css';
 
 const BoardDetails = ({
     utils
 }) => {
-    const location = useLocation();
-    const id = location.pathname.split("/").pop();
+    const routeParams = useParams();
+    const id = routeParams._id;
     const [board, setBoard] = useState({});
 
     useEffect(() => {
@@ -20,8 +23,7 @@ const BoardDetails = ({
     return (
         <form>
             <div>
-                <img src={board.imageSrc} alt=""
-                    className="image" />
+                <img src={board.imageSrc} alt="" className={styles.defaultImg} />
             </div>
             <p>Borad's name: <strong>{board.name}</strong></p>
             <p>Status: <strong>{utils.getStatusAsText(board.isActive)}</strong></p>
