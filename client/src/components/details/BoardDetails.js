@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-import * as boardService from '../services/BoardService';
+import * as boardService from '../services/boardService';
 
 import styles from './BoardDetails.module.css';
 
@@ -13,12 +13,18 @@ const BoardDetails = ({
     const id = routeParams._id;
     const [board, setBoard] = useState({});
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         boardService.getBoardById(id)
             .then(response => {
                 setBoard(response);
             })
     }, []);
+
+    const goBackToAllBoards = () => {
+        navigate('/');
+    }
 
     return (
         <form>
@@ -31,6 +37,9 @@ const BoardDetails = ({
             <p>Description: <strong>{board.description}</strong></p>
             <p>Suspects:</p>
             {<ul>{board.participants ? board.participants.map(p => <li key={p.email}><strong>{p.name}</strong></li>) : ''}</ul>}
+            <button id="action-cancel" className="btn btn-secondary" type="button" onClick={goBackToAllBoards}>
+                Go Back
+            </button>
         </form>
     );
 }

@@ -1,9 +1,9 @@
-import { requester } from "./requester";
+import { request } from "./requester";
 
 const baseUrl = 'http://localhost:3030/jsonstore/boards';
 
 export const getAll = async () => {
-    const boards = await requester('GET', baseUrl);
+    const boards = await request('GET', baseUrl);
     
     const result = Object.values(boards);
 
@@ -11,7 +11,7 @@ export const getAll = async () => {
 }
 
 export const getBoardById = async (id) => {
-    const board = await requester('GET', `${baseUrl}/${id}`);
+    const board = await request('GET', `${baseUrl}/${id}`);
 
     return board;
 }

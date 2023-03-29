@@ -53,13 +53,14 @@ a:hover {
 }
 
 #logo h1 {
-	padding: 50px 0 0 20px;
+	padding: 60px 0 0 50px;
 	letter-spacing: -.05em;
-	font-size: 4em;
+	font-size: 1.8em;
 }
 
 #logo h2 {
-	font-size: 1.8em;
+	font-size: 1.2em;
+	padding: 0 0 0 5px
 }
 
 #logo a {
@@ -71,10 +72,10 @@ a:hover {
 
 #navigation {
 	float: right;
-	width: 431px;
+	width: fit-content;
 	height: 50px;
 	margin: 50px 30px 0 0;
-	background: #99CC00 url(images/img05.gif);
+	background: #99CC00;
 }
 
 #navigation ul {

@@ -1,6 +1,6 @@
 import styles from './EditBoard.module.css';
 
-import * as boardService from '../services/BoardService';
+import * as boardService from '../services/boardService';
 
 import { useNavigate,  useParams } from "react-router-dom";
 
@@ -85,6 +85,10 @@ const EditBoard = ({
         setParticipantsCount(board.participants.length)
     }
 
+    const goBackToAllBoards = () => {
+        navigate('/');
+    }
+
     return (
         <>
             {addParticipant && <AddParticipant onCloseClick={onCloseClick}
@@ -162,7 +166,7 @@ const EditBoard = ({
                 </div>
 
                 <div id="form-actions" className={styles.formActions}>
-                    <button id="action-cancel" className={`btn btn-secondary ${styles.btnMainMargin}`} type="button">
+                    <button id="action-cancel" className={`btn btn-secondary ${styles.btnMainMargin}`} type="button" onClick={goBackToAllBoards}>
                         Cancel
                     </button>
                     <button id="action-save" className="btn btn-success" type="submit">
