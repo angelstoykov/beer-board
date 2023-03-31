@@ -88,7 +88,7 @@ a:hover {
 	display: inline;
 }
 
-#navigation a {
+#navigation a, span {
 	display: block;
 	float: left;
 	padding: .5em .7em;

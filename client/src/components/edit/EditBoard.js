@@ -1,15 +1,17 @@
 import styles from './EditBoard.module.css';
 
-import * as boardService from '../services/boardService';
+import { boardServiceFactory} from '../services/boardService';
 
-import { useNavigate,  useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
 import AddParticipant from './AddParticipant';
+import { useService } from '../../hooks/useService';
 
 const EditBoard = ({
-    utils
+    utils,
+    token
 }) => {
     const routeParams = useParams();
     const id = routeParams._id;
@@ -19,6 +21,7 @@ const EditBoard = ({
     const [board, setBoard] = useState({});
     const [addParticipant, setAddParticipant] = useState(false);
     const [participantsCount, setParticipantsCount] = useState(0);
+    const boardService = useService(boardServiceFactory);
 
     useEffect(() => {
         boardService.getBoardById(id)
@@ -52,10 +55,14 @@ const EditBoard = ({
         setBoard(board => ({ ...board, imageSrc: e.target.value }));
     }
 
+    const onDescriptionChange = (e) => {
+        setBoard(board => ({ ...board, description: e.target.value }));
+    }
+
     const onSubmitHandler = (e) => {
         e.preventDefault();
         console.log(board);
-        navigate('/');
+        navigate('/content');
     }
 
     const onparticipantDeleteClick = (id) => {
@@ -80,7 +87,7 @@ const EditBoard = ({
         console.log('added new participant');
         console.log(participant);
 
-        setBoard(board => ({...board, participants: [...board.participants, participant]}));
+        setBoard(board => ({ ...board, participants: [...board.participants, participant] }));
         console.log(board.participants);
         setParticipantsCount(board.participants.length)
     }
@@ -92,7 +99,7 @@ const EditBoard = ({
     return (
         <>
             {addParticipant && <AddParticipant onCloseClick={onCloseClick}
-                                               onAddNewParticipant={onAddNewParticipant} />}
+                onAddNewParticipant={onAddNewParticipant} />}
             <form onSubmit={onSubmitHandler}>
                 <div className="form-group">
                     <label htmlFor="name">Board name</label>
@@ -138,7 +145,7 @@ const EditBoard = ({
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <div className="input-wrapper">
-                        <input id="description" name="description" type="text" value={board.description} />
+                        <input id="description" name="description" type="text" value={board.description} onChange={(e) => onDescriptionChange(e)} />
                     </div>
                     <p className="form-error">
                         Description should be at least 2 characters long!
@@ -160,7 +167,7 @@ const EditBoard = ({
                     {participantsCount === 0
                         ? <p className={styles.formError}>
                             Participants should be at least 1! :D
-                          </p>
+                        </p>
                         : ''
                     }
                 </div>

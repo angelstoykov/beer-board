@@ -1,5 +1,4 @@
-// export const request = async (method, token, url, data) => {
-    export const request = async (method, url, data) => {
+export const request = async (method, token, url, data) => {
     const options = {};
     
     if (method !== 'GET') {
@@ -14,12 +13,12 @@
         }
     }
 
-    // if (token) {
-    //     options.headers = {
-    //         ...options.headers,
-    //         'X-Authorization': token,
-    //     };
-    // }
+    if (token) {
+        options.headers = {
+            ...options.headers,
+            'X-Authorization': token,
+        };
+    }
 
     const response = await fetch(url, options);
 
@@ -36,8 +35,12 @@
     return result;
 };
 
-export const get = request.bind(undefined, 'GET');
-export const post = request.bind(undefined, 'POST');
-export const put = request.bind(undefined, 'PUT');
-export const patch = request.bind(undefined, 'PATCH');
-export const del = request.bind(undefined, 'DELETE');
+export const requestFactory = (token) => {
+    return {
+        get: request.bind(undefined, 'GET', token),
+        post: request.bind(undefined, 'POST', token),
+        put: request.bind(undefined, 'PUT', token),
+        patch: request.bind(undefined, 'PATCH', token),
+        delete: request.bind(undefined, 'DELETE', token),
+    }
+};

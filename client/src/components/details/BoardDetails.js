@@ -2,16 +2,18 @@ import { useEffect, useState } from "react";
 
 import { useParams, useNavigate } from "react-router-dom";
 
-import * as boardService from '../services/boardService';
+import { boardServiceFactory } from '../services/boardService';
+import { useService } from "../../hooks/useService";
 
 import styles from './BoardDetails.module.css';
 
 const BoardDetails = ({
-    utils
+    utils,
 }) => {
     const routeParams = useParams();
     const id = routeParams._id;
     const [board, setBoard] = useState({});
+    const boardService = useService(boardServiceFactory);
 
     const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const BoardDetails = ({
     }, []);
 
     const goBackToAllBoards = () => {
-        navigate('/');
+        navigate('/content');
     }
 
     return (

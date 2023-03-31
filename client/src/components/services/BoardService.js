@@ -1,17 +1,27 @@
-import { request } from "./requester";
+import { requestFactory } from "./requester";
 
-const baseUrl = 'http://localhost:3030/jsonstore/boards';
+const baseUrl = 'http://localhost:3030/data/boards';
 
-export const getAll = async () => {
-    const boards = await request('GET', baseUrl);
+export const boardServiceFactory = (token) => {
+    const request = requestFactory(token);
+
+    const getAll = async () => {
+        const boards = await request.get(baseUrl);
+        
+        const result = Object.values(boards);
     
-    const result = Object.values(boards);
+        return result;
+    }
+    
+    const getBoardById = async (id) => {
+        console.log(`getBoardById`, id);
+        const board = await request.get(`${baseUrl}/${id}`);
+    
+        return board;
+    }
 
-    return result;
-}
-
-export const getBoardById = async (id) => {
-    const board = await request('GET', `${baseUrl}/${id}`);
-
-    return board;
+    return {
+        getAll,
+        getBoardById
+    };
 }

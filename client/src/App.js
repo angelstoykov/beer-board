@@ -1,27 +1,34 @@
 import './App.css';
 
 import { AuthContext } from './contexts/AuthContext';
-import * as authService from './components/services/authService';
+import { authServiceFactory } from './components/services/authService';
 
 import Content from './components/content/Content';
 import Header from './components/header/Header';
 import BoardDetails from './components/details/BoardDetails';
 import Login from './components/Login/Login';
+import { Logout } from './components/Logout/Logout';
 import Register from './components/Register/Register';
 import EditBoard from './components/edit/EditBoard';
 import Contact from './components/contact/Contact';
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 
-import * as boardService from './components/services/boardService';
+import { boardServiceFactory } from './components/services/boardService';
 
 import * as utils from './utils/utils';
+import Home from './components/Home/Home';
+import { useService } from './hooks/useService';
 
 function App() {
     const [boards, setBoards] = useState([]);
     const [auth, setAuth] = useState({});
+    const authService = authServiceFactory(auth.accessToken);
+    const boardService = boardServiceFactory(auth.accessToken);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         boardService.getAll()
@@ -31,24 +38,63 @@ function App() {
     }, []);
 
     const onLoginSubmit = async (data) => {
-        console.log(data);
-        const result = await authService.login(data);
-        console.log(result);
+        try {
+            const result = await authService.login(data);
+
+            setAuth(result);
+
+            navigate('/content');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const onLogout = async () => {
+        //        const a = await authService.logout();
+        setAuth({});
+    };
+
+    const onRegisterSubmit = async (values) => {
+        const { passwordRepeat, ...registerData } = values;
+        if (passwordRepeat !== registerData.password) {
+            return;
+        }
+
+        try {
+            const result = await authService.register(registerData);
+
+            setAuth(result);
+
+            navigate('/content');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const contextVlues = {
+        onLoginSubmit,
+        onLogout,
+        onRegisterSubmit,
+        userId: auth._id,
+        token: auth.accessToken,
+        userEmail: auth.email,
+        isAuthenticated: !!auth.accessToken,
     }
 
     return (
-        <AuthContext.Provider value={{onLoginSubmit}}>
+        <AuthContext.Provider value={contextVlues}>
             <div>
                 <Header />
 
                 <Routes>
-                    <Route path="/Contact" element={<Contact />} />
-                    <Route path="/" element={<Content boards={boards} />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/content" element={<Content boards={boards} />} />
                     <Route path="/details/board/:_id" element={<BoardDetails utils={utils} />} />
                     <Route path="/edit/board/:_id" element={<EditBoard utils={utils} />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path='/logout' element={<Logout />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="*" element={<h1>404</h1>} />
                 </Routes>
             </div>
         </AuthContext.Provider>
