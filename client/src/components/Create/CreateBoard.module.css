@@ -1,0 +1,39 @@
+.btn {
+    background: #2a87a5;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    font-weight: bold;
+    padding: 5px;
+    margin-right: 10px;
+  }
+
+  .formActions {
+    display: flex;
+  }
+
+  .statusWrapper {
+    display: flex;
+  }
+
+  .statusBtn {
+
+  }
+
+  i {
+    margin-left: 10px;
+  }
+
+  .btnMainMargin {
+    margin-right: 10px;
+  }
+
+  .formError {
+    color: #d9534f;
+    min-height: 20px;
+  }

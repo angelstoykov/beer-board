@@ -11,6 +11,7 @@ import { Logout } from './components/Logout/Logout';
 import Register from './components/Register/Register';
 import EditBoard from './components/edit/EditBoard';
 import Contact from './components/contact/Contact';
+import CreateBoard from './components/Create/CreateBoard';
 
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -20,7 +21,6 @@ import { boardServiceFactory } from './components/services/boardService';
 
 import * as utils from './utils/utils';
 import Home from './components/Home/Home';
-import { useService } from './hooks/useService';
 
 function App() {
     const [boards, setBoards] = useState([]);
@@ -50,8 +50,11 @@ function App() {
     }
 
     const onLogout = async () => {
-        //        const a = await authService.logout();
+
+        //const a = await authService.logout();
         setAuth({});
+        contextVlues.isAuthenticated = false;
+        navigate('/');
     };
 
     const onRegisterSubmit = async (values) => {
@@ -69,6 +72,14 @@ function App() {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const onCreateBoardHandler = async (e, payload) => {
+        e.preventdefault();
+        debugger
+        const newBoard = await boardService.create(payload);
+console.log(newBoard);
+        navigate('/content');
     }
 
     const contextVlues = {
@@ -90,11 +101,12 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/content" element={<Content boards={boards} />} />
-                    <Route path="/details/board/:_id" element={<BoardDetails utils={utils} />} />
+                    <Route path="/details/board/:_id" element={<BoardDetails utils={utils} stateChanger={setBoards} />} />
                     <Route path="/edit/board/:_id" element={<EditBoard utils={utils} />} />
                     <Route path="/login" element={<Login />} />
                     <Route path='/logout' element={<Logout />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/create/board" element={<CreateBoard utils={utils} onCreateBoardHandler={onCreateBoardHandler} />} />
                 </Routes>
             </div>
         </AuthContext.Provider>

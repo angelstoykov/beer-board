@@ -14,14 +14,24 @@ export const boardServiceFactory = (token) => {
     }
     
     const getBoardById = async (id) => {
-        console.log(`getBoardById`, id);
         const board = await request.get(`${baseUrl}/${id}`);
     
         return board;
     }
 
+    const create = async (payload) => {
+        const result = await request.post(baseUrl, payload);
+    
+        console.log(result);
+    
+        return result;
+    };
+
+    const deleteBoard = (id) => request.delete(`${baseUrl}/${id}`);
+
     return {
         getAll,
-        getBoardById
+        getBoardById,
+        delete: deleteBoard,
     };
 }
