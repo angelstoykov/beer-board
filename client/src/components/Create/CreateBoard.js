@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AddParticipant from '../edit/AddParticipant';
 import { boardServiceFactory } from '../services/boardService';
 import { useService } from '../../hooks/useService';
+import { useForm } from '../../hooks/useForm';
 
 import styles from './CreateBoard.module.css';
 
@@ -23,22 +24,6 @@ const CreateBoard = ({
     const [addParticipant, setAddParticipant] = useState(false);
     const boardService = useService(boardServiceFactory);
     const navigate = useNavigate();
-
-    const onChangeHandler = (e) => {
-        setNewBoard({ ...newBoard, [e.target.name]: e.target.value })
-    }
-
-    const increaseBeerCount = () => {
-        setNewBoard(newBoard => ({ ...newBoard, beersCount: newBoard.beersCount + 1 }));
-    };
-
-    const decreaseBeerCount = () => {
-        setNewBoard(newBoard => ({ ...newBoard, beersCount: newBoard.beersCount - 1 }));
-    };
-
-    const resetBeerCount = () => {
-        setNewBoard(newBoard => ({ ...newBoard, beersCount: 0 }));
-    };
 
     const toggleStatus = (status) => {
         setNewBoard(newBoard => ({ ...newBoard, isActive: !status }))
@@ -66,7 +51,6 @@ const CreateBoard = ({
     }
 
     const onAddNewParticipant = (e, participant) => {
-        debugger
         e.preventDefault();
         console.log('added new participant');
         console.log(participant);
@@ -76,16 +60,25 @@ const CreateBoard = ({
         setParticipantsCount(newBoard.participants.length)
     }
 
+    const { values, changeHandler, onSubmit, increaseBeerCount, decreaseBeerCount, resetBeerCount } = useForm({
+        name: '',
+        status: false,
+        beersCount: 0,
+        imageSrc: '',
+        description: '',
+        participants: []
+    }, onCreateBoardHandler);
+
     return (
         <>
             {addParticipant && <AddParticipant
                 onCloseClick={onCloseClick}
                 onAddNewParticipant={onAddNewParticipant} />}
-            <form onSubmit={(e) => onCreateBoardHandler(e)}>
+            <form id="create" method="POST" onSubmit={onSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Board name</label>
                     <div className="input-wrapper">
-                        <input id="name" name="name" type="text" value={newBoard.name ?? ''} onChange={(e) => onChangeHandler(e)} />
+                        <input id="name" name="name" type="text" value={values.name} onChange={changeHandler} />
                     </div>
                     <p className="form-error">
                         First name should be at least 3 characters long!
@@ -95,9 +88,9 @@ const CreateBoard = ({
                     <label htmlFor="status">Status</label>
                     <div className="input-wrapper">
                         <div className={styles.statusWrapper}>
-                            <p><strong>{utils.getStatusAsText(newBoard.isActive)}</strong></p>
+                            <p><strong>{utils.getStatusAsText(values.isActive)}</strong></p>
                             <button id="toggle-status" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={() => toggleStatus(newBoard.isActive)}>
-                                {utils.getChangeStatusBtnCaption(newBoard.isActive)}
+                                {utils.getChangeStatusBtnCaption(values.isActive)}
                             </button>
                         </div>
 
@@ -107,7 +100,7 @@ const CreateBoard = ({
                 <div className="form-group">
                     <label htmlFor="beersCount">Beers count</label>
                     <div className="input-wrapper">
-                        <p><strong>{newBoard.beersCount}</strong></p>
+                        <p name="beersCount"><strong>{values.beersCount}</strong></p>
                     </div>
                     <button id="decreaser" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={decreaseBeerCount}>-</button>
                     <button id="decreaser" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={resetBeerCount}>Reset</button>
@@ -118,7 +111,7 @@ const CreateBoard = ({
                 <div className="form-group long-line">
                     <label htmlFor="imageSrc">Image Src</label>
                     <div className="input-wrapper">
-                        <input id="imageSrc" name="imageSrc" type="text" value={newBoard.imageSrc ?? ''} onChange={(e) => onChangeHandler(e)} />
+                        <input id="imageSrc" name="imageSrc" type="text" value={values.imageSrc} onChange={changeHandler} />
                     </div>
                     <p className="form-error">ImageSrc is not valid!</p>
                 </div>
@@ -126,7 +119,7 @@ const CreateBoard = ({
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <div className="input-wrapper">
-                        <input id="description" name="description" type="text" value={newBoard.description ?? ''} onChange={(e) => onChangeHandler(e)} />
+                        <input id="description" name="description" type="text" value={values.description} onChange={changeHandler} />
                     </div>
                     <p className="form-error">
                         Description should be at least 2 characters long!

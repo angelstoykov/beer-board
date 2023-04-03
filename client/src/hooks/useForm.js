@@ -7,6 +7,18 @@ export const useForm = (initialValues, onSubmitHandler) => {
         setValues(state => ({...state, [e.target.name]: e.target.value}))
     }
 
+    const increaseBeerCount = () => {
+        setValues(state => ({ ...state, beersCount: state.beersCount + 1 }));
+    };
+
+    const decreaseBeerCount = () => {
+        setValues(state => ({ ...state, beersCount: state.beersCount - 1 }));
+    };
+
+    const resetBeerCount = () => {
+        setValues(state => ({ ...state, beersCount: 0 }));
+    };
+
     const onSubmit = (e) => {
         e.preventDefault();
         onSubmitHandler(values);
@@ -15,6 +27,9 @@ export const useForm = (initialValues, onSubmitHandler) => {
     return {
         values,
         changeHandler,
-        onSubmit
+        onSubmit,
+        increaseBeerCount,
+        decreaseBeerCount,
+        resetBeerCount,
     }
 }

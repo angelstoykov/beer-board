@@ -72,7 +72,6 @@ const EditBoard = ({
     }
 
     const onAddParticipantClick = () => {
-        debugger
         setAddParticipant(true);
         console.log('modal?');
     }

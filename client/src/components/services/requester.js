@@ -1,6 +1,7 @@
 export const request = async (method, token, url, data) => {
     const options = {};
     
+    debugger
     if (method !== 'GET') {
         options.method = method;
 
@@ -19,7 +20,6 @@ export const request = async (method, token, url, data) => {
             'X-Authorization': token,
         };
     }
-
     const response = await fetch(url, options);
 
     if (response.status === 204) {

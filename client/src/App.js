@@ -74,11 +74,10 @@ function App() {
         }
     }
 
-    const onCreateBoardHandler = async (e, payload) => {
-        e.preventdefault();
-        debugger
-        const newBoard = await boardService.create(payload);
-console.log(newBoard);
+    const onCreateBoardHandler = async (data) => {
+        console.log('create board');
+        const newBoard = await boardService.create(data);
+        console.log(newBoard);
         navigate('/content');
     }
 
@@ -106,7 +105,7 @@ console.log(newBoard);
                     <Route path="/login" element={<Login />} />
                     <Route path='/logout' element={<Logout />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/create/board" element={<CreateBoard utils={utils} onCreateBoardHandler={onCreateBoardHandler} />} />
+                    <Route path="/create-board" element={<CreateBoard utils={utils} onCreateBoardHandler={onCreateBoardHandler} />} />
                 </Routes>
             </div>
         </AuthContext.Provider>
