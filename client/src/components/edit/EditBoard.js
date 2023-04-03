@@ -58,9 +58,11 @@ const EditBoard = ({
         setBoard(board => ({ ...board, description: e.target.value }));
     }
 
-    const onSubmitHandler = (e) => {
+    const onEditHandler = async (e) => {
         e.preventDefault();
         console.log(board);
+        const result = await boardService.edit(board._id, board);
+        console.log(result);
         navigate('/content');
     }
 
@@ -100,7 +102,7 @@ const EditBoard = ({
             {addParticipant && <AddParticipant
                                     onCloseClick={onCloseClick}
                                     onAddNewParticipant={onAddNewParticipant} />}
-            <form onSubmit={onSubmitHandler}>
+            <form onSubmit={onEditHandler}>
                 <div className="form-group">
                     <label htmlFor="name">Board name</label>
                     <div className="input-wrapper">

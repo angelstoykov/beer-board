@@ -30,10 +30,13 @@ export const boardServiceFactory = (token) => {
 
     const deleteBoard = (id) => request.delete(`${baseUrl}/${id}`);
 
+    const editBoard = (id, data) => request.put(`${baseUrl}/${id}`, data);
+
     return {
         getAll,
         getBoardById,
         delete: deleteBoard,
         create,
+        edit: editBoard,
     };
 }
