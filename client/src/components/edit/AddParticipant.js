@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const AddParticipant = ({
     onCloseClick,
-    onAddNewParticipant,
+    addNewParticipant,
 }) => {
     const [participant, setParticipant] = useState({});
 
@@ -33,7 +33,7 @@ const AddParticipant = ({
                                     <label htmlFor="name">Name</label>
                                     <div className="input-wrapper">
                                         <span><i className="fa-solid fa-user"></i></span>
-                                        <input id="name" name="name" type="text" value={participant?.name} onChange={(e) => onParticipantNameChange(e)}/>
+                                        <input id="name" name="name" type="text" value={participant.name ?? ''} onChange={(e) => onParticipantNameChange(e)} />
                                     </div>
                                     <p className="form-error">
                                         First name should be at least 3 characters long!
@@ -46,7 +46,7 @@ const AddParticipant = ({
                                     <label htmlFor="email">Email</label>
                                     <div className="input-wrapper">
                                         <span><i className="fa-solid fa-envelope"></i></span>
-                                        <input id="email" name="email" type="text" value={participant?.email} onChange={(e) => onParticipantEmailChange(e)}/>
+                                        <input id="email" name="email" type="text" value={participant.email ?? ''} onChange={(e) => onParticipantEmailChange(e)} />
                                     </div>
                                     <p className="form-error">Email is not valid!</p>
                                 </div>
@@ -55,7 +55,7 @@ const AddParticipant = ({
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={onCloseClick}>Close</button>
-                        <button type="button" className="btn btn-primary" onClick={(e) => onAddNewParticipant(e, participant)}>Add</button>
+                        <button type="button" className="btn btn-primary" onClick={(e) => addNewParticipant(e, participant)}>Add</button>
                     </div>
                 </div>
             </div>

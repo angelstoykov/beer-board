@@ -22,6 +22,18 @@ export const useForm = (initialValues, onSubmitHandler) => {
     const onSubmit = (e) => {
         e.preventDefault();
         onSubmitHandler(values);
+    };
+
+    const addNewParticipant = (e, participant) => {
+        e.preventDefault();
+
+        //setValues(state => ({ ...state, participants: [...state.participants, participant] }));
+
+        //values.participants.push(participant);
+        //setValues(current => ({ ...current, participants: [current.participants, participant] }));
+values.participants = values.participants.concat([participant]);
+        // setParticipantsCount(values.participants.length)
+        debugger
     }
 
     return {
@@ -31,5 +43,6 @@ export const useForm = (initialValues, onSubmitHandler) => {
         increaseBeerCount,
         decreaseBeerCount,
         resetBeerCount,
+        addNewParticipant,
     }
 }

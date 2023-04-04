@@ -172,19 +172,6 @@ a:hover {
 	color: #FFFFFF;
 }
 
-#sidebar .boxed ul {}
-
-#sidebar .boxed li {}
-
-#sidebar .boxed a {
-	text-decoration: none;
-	color: #3399FF;
-}
-
-#sidebar .boxed a:hover {
-	color: #FF9900;
-}
-
 /* Tag Cloud */
 
 #tagcloud {}

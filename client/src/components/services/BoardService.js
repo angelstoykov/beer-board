@@ -20,7 +20,6 @@ export const boardServiceFactory = (token) => {
     }
 
     const create = async (payload) => {
-        debugger
         const result = await request.post(baseUrl, payload);
     
         console.log(result);

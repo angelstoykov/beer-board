@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddParticipant from '../edit/AddParticipant';
-import { boardServiceFactory } from '../services/boardService';
-import { useService } from '../../hooks/useService';
 import { useForm } from '../../hooks/useForm';
 
 import styles from './CreateBoard.module.css';
@@ -22,15 +20,10 @@ const CreateBoard = ({
     const [newBoard, setNewBoard] = useState(boardInitials);
     const [participantsCount, setParticipantsCount] = useState(0);
     const [addParticipant, setAddParticipant] = useState(false);
-    const boardService = useService(boardServiceFactory);
     const navigate = useNavigate();
 
-    const toggleStatus = (status) => {
-        setNewBoard(newBoard => ({ ...newBoard, isActive: !status }))
-    };
-
-    const onParticipantDeleteClick = (id) => {
-        let filteredParticipants = newBoard.participants.filter(p => p._id !== id)
+    const onParticipantDeleteClick = (email) => {
+        let filteredParticipants = newBoard.participants.filter(p => p.email !== email)
 
         setNewBoard(newBoard => ({ ...newBoard, participants: filteredParticipants }));
         setParticipantsCount(filteredParticipants.length)
@@ -50,19 +43,20 @@ const CreateBoard = ({
         console.log('onclose click');
     }
 
-    const onAddNewParticipant = (e, participant) => {
-        e.preventDefault();
-        console.log('added new participant');
-        console.log(participant);
+    // const onAddNewParticipant = (e, participant) => {
+    //     e.preventDefault();
 
-        setNewBoard(newBoard => ({ ...newBoard, participants: [...newBoard.participants, participant] }));
-        console.log(newBoard.participants);
-        setParticipantsCount(newBoard.participants.length)
-    }
+    //     // setNewBoard(newBoard => ({ ...newBoard, participants: [...newBoard.participants, participant] }));
 
-    const { values, changeHandler, onSubmit, increaseBeerCount, decreaseBeerCount, resetBeerCount } = useForm({
+    //     newBoard.participants.push(participant);
+        
+    //     setParticipantsCount(newBoard.participants.length)
+    //     debugger
+    // }
+
+    const { values, changeHandler, onSubmit, increaseBeerCount, decreaseBeerCount, resetBeerCount, addNewParticipant } = useForm({
         name: '',
-        status: false,
+        isActive: true,
         beersCount: 0,
         imageSrc: '',
         description: '',
@@ -73,7 +67,7 @@ const CreateBoard = ({
         <>
             {addParticipant && <AddParticipant
                 onCloseClick={onCloseClick}
-                onAddNewParticipant={onAddNewParticipant} />}
+                addNewParticipant={addNewParticipant} />}
             <form id="create" method="POST" onSubmit={onSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Board name</label>
@@ -89,9 +83,6 @@ const CreateBoard = ({
                     <div className="input-wrapper">
                         <div className={styles.statusWrapper}>
                             <p><strong>{utils.getStatusAsText(values.isActive)}</strong></p>
-                            <button id="toggle-status" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={() => toggleStatus(newBoard.isActive)}>
-                                {utils.getChangeStatusBtnCaption(values.isActive)}
-                            </button>
                         </div>
 
                     </div>
@@ -130,13 +121,15 @@ const CreateBoard = ({
                     <label htmlFor="participants">Participants</label>
                     <i className="fa fa-plus-circle" aria-hidden="true" data-toggle="modal" data-target="#exampleModal" onClick={onAddParticipantClick}></i>
                     <div className="input-wrapper">
-                        {<ul>{newBoard.participants.length
-                            ? newBoard.participants.map(p =>
+                        <ul>{values.participants.length
+                            ? values.participants.map(p =>
                                 <li key={p.email}>
-                                    <strong>{p.name}</strong>
-                                    <span><i className="fa-solid fa-trash" onClick={() => onParticipantDeleteClick(p._id)}></i></span>
+                                    <span>
+                                        <strong>{p.name}</strong>
+                                        <i className="fa-solid fa-trash" onClick={() => onParticipantDeleteClick(p.email)}></i>
+                                    </span>
                                 </li>)
-                            : ''}</ul>}
+                            : ''}</ul>
                     </div>
                     {participantsCount === 0
                         ? <p className={styles.formError}>

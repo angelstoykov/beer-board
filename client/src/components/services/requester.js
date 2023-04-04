@@ -1,7 +1,6 @@
 export const request = async (method, token, url, data) => {
     const options = {};
     
-    debugger
     if (method !== 'GET') {
         options.method = method;
 
