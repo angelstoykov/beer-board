@@ -60,9 +60,9 @@ const EditBoard = ({
 
     const onEditHandler = async (e) => {
         e.preventDefault();
-        console.log(board);
+
         const result = await boardService.edit(board._id, board);
-        console.log(result);
+
         navigate('/content');
     }
 
@@ -75,21 +75,17 @@ const EditBoard = ({
 
     const onAddParticipantClick = () => {
         setAddParticipant(true);
-        console.log('modal?');
     }
 
     const onCloseClick = () => {
         setAddParticipant(false);
-        console.log('onclose click');
     }
 
     const onAddNewParticipant = (e, participant) => {
         e.preventDefault();
-        console.log('added new participant');
-        console.log(participant);
 
         setBoard(board => ({ ...board, participants: [...board.participants, participant] }));
-        console.log(board.participants);
+
         setParticipantsCount(board.participants.length)
     }
 

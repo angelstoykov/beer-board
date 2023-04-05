@@ -7,12 +7,10 @@ const AddParticipant = ({
     const [participant, setParticipant] = useState({});
 
     const onParticipantNameChange = (e) => {
-        console.log(e.target.value);
         setParticipant(p => ({ ...p, name: e.target.value }));
     }
 
     const onParticipantEmailChange = (e) => {
-        console.log(e.target.value);
         setParticipant(p => ({ ...p, email: e.target.value }));
     }
 

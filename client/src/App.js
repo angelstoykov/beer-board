@@ -75,9 +75,8 @@ function App() {
     }
 
     const onCreateBoardHandler = async (data) => {
-        console.log('create board');
         const newBoard = await boardService.create(data);
-        console.log(newBoard);
+
         navigate('/content');
     }
 

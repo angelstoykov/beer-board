@@ -36,12 +36,10 @@ const CreateBoard = ({
 
     const onAddParticipantClick = () => {
         setAddParticipant(true);
-        console.log('modal?');
     }
 
     const onCloseClick = () => {
         setAddParticipant(false);
-        console.log('onclose click');
     }
 
     const addNewParticipant = (e, participant) => {
@@ -49,7 +47,6 @@ const CreateBoard = ({
 
         setParticipant(participants => [...participants, participant]);
 
-        debugger
         setParticipantsCount(participants.length)
     }
 

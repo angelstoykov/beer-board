@@ -22,8 +22,6 @@ export const boardServiceFactory = (token) => {
     const create = async (payload) => {
         const result = await request.post(baseUrl, payload);
     
-        console.log(result);
-    
         return result;
     };
 
