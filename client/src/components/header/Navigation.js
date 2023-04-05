@@ -27,7 +27,7 @@ const Navigation = () => {
                 {/* Registered user view */}
                 {isAuthenticated && (
                     <div id="user">
-                        <Link to="/content" element={<Content />}>My Boards</Link>
+                        <Link to="/content" element={<Content />}>Boards</Link>
                         <Link to="/contact" element={<Contact />}>Contact</Link>
                         <span>{userEmail}</span>
                         <Link to="/logout" element={<Logout />}>Logout</Link>
