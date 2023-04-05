@@ -20,6 +20,7 @@ const CreateBoard = ({
     const [newBoard, setNewBoard] = useState(boardInitials);
     const [participantsCount, setParticipantsCount] = useState(0);
     const [addParticipant, setAddParticipant] = useState(false);
+    const [participants, setParticipant] = useState([]);
     const navigate = useNavigate();
 
     const onParticipantDeleteClick = (email) => {
@@ -43,24 +44,21 @@ const CreateBoard = ({
         console.log('onclose click');
     }
 
-    // const onAddNewParticipant = (e, participant) => {
-    //     e.preventDefault();
+    const addNewParticipant = (e, participant) => {
+        e.preventDefault();
 
-    //     // setNewBoard(newBoard => ({ ...newBoard, participants: [...newBoard.participants, participant] }));
+        setParticipant(participants => [...participants, participant]);
 
-    //     newBoard.participants.push(participant);
-        
-    //     setParticipantsCount(newBoard.participants.length)
-    //     debugger
-    // }
+        debugger
+        setParticipantsCount(participants.length)
+    }
 
-    const { values, changeHandler, onSubmit, increaseBeerCount, decreaseBeerCount, resetBeerCount, addNewParticipant } = useForm({
+    const { values, changeHandler, onSubmit, increaseBeerCount, decreaseBeerCount, resetBeerCount } = useForm({
         name: '',
         isActive: true,
         beersCount: 0,
         imageSrc: '',
         description: '',
-        participants: []
     }, onCreateBoardHandler);
 
     return (
@@ -68,7 +66,7 @@ const CreateBoard = ({
             {addParticipant && <AddParticipant
                 onCloseClick={onCloseClick}
                 addNewParticipant={addNewParticipant} />}
-            <form id="create" method="POST" onSubmit={onSubmit}>
+            <form id="create" method="POST" onSubmit={(e) => onSubmit(e, participants)}>
                 <div className="form-group">
                     <label htmlFor="name">Board name</label>
                     <div className="input-wrapper">
@@ -121,8 +119,8 @@ const CreateBoard = ({
                     <label htmlFor="participants">Participants</label>
                     <i className="fa fa-plus-circle" aria-hidden="true" data-toggle="modal" data-target="#exampleModal" onClick={onAddParticipantClick}></i>
                     <div className="input-wrapper">
-                        <ul>{values.participants.length
-                            ? values.participants.map(p =>
+                        <ul>{participants.length
+                            ? participants.map(p =>
                                 <li key={p.email}>
                                     <span>
                                         <strong>{p.name}</strong>

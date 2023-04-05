@@ -19,21 +19,14 @@ export const useForm = (initialValues, onSubmitHandler) => {
         setValues(state => ({ ...state, beersCount: 0 }));
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = (e, participants) => {
         e.preventDefault();
+
+        if (Array.isArray(participants) && participants.length !== 0) {
+            values.participants = participants;
+        }
+        
         onSubmitHandler(values);
-    };
-
-    const addNewParticipant = (e, participant) => {
-        e.preventDefault();
-
-        //setValues(state => ({ ...state, participants: [...state.participants, participant] }));
-
-        //values.participants.push(participant);
-        //setValues(current => ({ ...current, participants: [current.participants, participant] }));
-values.participants = values.participants.concat([participant]);
-        // setParticipantsCount(values.participants.length)
-        debugger
     }
 
     return {
@@ -43,6 +36,5 @@ values.participants = values.participants.concat([participant]);
         increaseBeerCount,
         decreaseBeerCount,
         resetBeerCount,
-        addNewParticipant,
     }
 }

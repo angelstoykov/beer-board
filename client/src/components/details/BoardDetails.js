@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { boardServiceFactory } from '../services/boardService';
 import { useService } from "../../hooks/useService";
@@ -8,6 +8,7 @@ import { useService } from "../../hooks/useService";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import styles from './BoardDetails.module.css';
+import Button from 'react-bootstrap/Button';
 
 const BoardDetails = ({
     utils,
@@ -55,17 +56,15 @@ const BoardDetails = ({
             {isOwner &&
                 (
                     <>
-                    <button id="action-cancel" className="btn btn-secondary" type="button" onClick={goBackToAllBoards}>
-                        Edit
-                    </button>
-                    <button id="action-delete" className="btn btn-secondary" type="button" onClick={onDeleteClick}>
-                        Delete
-                    </button>
+                        <Link to={{ pathname: `/edit/board/${board._id}` }} style={{ marginLeft: '10px' }}><Button variant='primary'>Edit</Button></Link>
+                        <button id="action-delete" className="btn btn-danger" type="button" onClick={onDeleteClick}>
+                            Delete
+                        </button>
                     </>
                 )
             }
 
-            <button id="action-cancel" className="btn btn-secondary" type="button" onClick={goBackToAllBoards}>
+            <button id="action-cancel" className="btn btn-success" type="button" onClick={goBackToAllBoards}>
                 Go Back
             </button>
         </form>

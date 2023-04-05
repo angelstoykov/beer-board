@@ -19,7 +19,6 @@ const Board = ({
         <Card.Title>{name}</Card.Title>
         <Card.Text>{beersCount} on the board</Card.Text>
         <Link to={{ pathname: `/details/board/${_id}` }} style={{ marginLeft: '10px' }}><Button variant='primary'>Details</Button></Link>
-        <Link to={{ pathname: `/edit/board/${_id}` }} style={{ marginLeft: '10px' }}><Button variant='primary'>Edit</Button></Link>
       </Card.Body>
     </Card>
   );
