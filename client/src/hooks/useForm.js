@@ -7,23 +7,15 @@ export const useForm = (initialValues, onSubmitHandler) => {
         setValues(state => ({...state, [e.target.name]: e.target.value}))
     }
 
-    const increaseBeerCount = () => {
-        setValues(state => ({ ...state, beersCount: state.beersCount + 1 }));
-    };
-
-    const decreaseBeerCount = () => {
-        setValues(state => ({ ...state, beersCount: state.beersCount - 1 }));
-    };
-
-    const resetBeerCount = () => {
-        setValues(state => ({ ...state, beersCount: 0 }));
-    };
-
-    const onSubmit = (e, participants) => {
+    const onSubmit = (e, participants, beersCount) => {
         e.preventDefault();
 
         if (Array.isArray(participants) && participants.length !== 0) {
             values.participants = participants;
+        }
+
+        if (typeof beersCount === 'number') {
+            values.beersCount = beersCount;
         }
         
         onSubmitHandler(values);
@@ -33,8 +25,5 @@ export const useForm = (initialValues, onSubmitHandler) => {
         values,
         changeHandler,
         onSubmit,
-        increaseBeerCount,
-        decreaseBeerCount,
-        resetBeerCount,
     }
 }

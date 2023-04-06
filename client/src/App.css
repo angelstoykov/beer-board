@@ -145,33 +145,6 @@ a:hover {
 	line-height: 180%;
 }
 
-/* Sidebar */
-
-#sidebar {
-	float: left;
-	width: 240px;
-}
-
-/* Boxed */
-
-#sidebar .boxed {
-	width: 240px;
-	padding: 0 0 3em 0;
-	background: #FFCC00 url(images/img04.gif) no-repeat left bottom;
-}
-
-#sidebar .boxed h2 {
-	height: 40px;
-	padding: 10px 0 0 30px;
-	background: url(images/img03.gif) no-repeat;
-	font-size: 2em;
-	color: #FFFFFF;
-}
-
-#sidebar .boxed .content {
-	color: #FFFFFF;
-}
-
 /* Tag Cloud */
 
 #tagcloud {}
