@@ -23,9 +23,10 @@ const CreateBoard = ({
     const navigate = useNavigate();
 
     const onParticipantDeleteClick = (email) => {
-        let filteredParticipants = newBoard.participants.filter(p => p.email !== email)
-
-        setNewBoard(newBoard => ({ ...newBoard, participants: filteredParticipants }));
+        console.log(email);
+        let filteredParticipants = participants.filter(p => p.email !== email)
+debugger
+        setParticipant([...participants, filteredParticipants ]);
     }
 
     const goBackToAllBoards = () => {
