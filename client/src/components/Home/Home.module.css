@@ -1,0 +1,10 @@
+.sectionWrapper {
+    display: flex;
+    width: 35%;
+    justify-content: center;
+    margin-left: 50%;
+}
+
+.homeImage img {
+    width: 250px;
+}

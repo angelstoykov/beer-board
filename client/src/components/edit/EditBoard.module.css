@@ -20,3 +20,11 @@
     color: #d9534f;
     min-height: 20px;
   }
+
+  .beerCounterBtns {
+    width: 40px;
+  }
+
+  .beerCounterResetBtn {
+    width: 60px;
+  }

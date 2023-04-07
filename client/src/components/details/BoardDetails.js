@@ -56,7 +56,7 @@ const BoardDetails = ({
             {isOwner &&
                 (
                     <>
-                        <Link to={{ pathname: `/edit/board/${board._id}` }} style={{ marginLeft: '10px' }}><Button variant='primary'>Edit</Button></Link>
+                        <Link to={{ pathname: `/edit/board/${board._id}` }}><Button variant='primary'>Edit</Button></Link>
                         <button id="action-delete" className="btn btn-danger" type="button" onClick={onDeleteClick}>
                             Delete
                         </button>

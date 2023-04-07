@@ -20,16 +20,16 @@ const EditBoard = ({
 
     const [board, setBoard] = useState({});
     const [addParticipant, setAddParticipant] = useState(false);
-    const [participantsCount, setParticipantsCount] = useState(0);
+    const [participants, setParticipant] = useState([]);
     const boardService = useService(boardServiceFactory);
 
     useEffect(() => {
         boardService.getBoardById(id)
             .then(response => {
                 setBoard(response);
-                setParticipantsCount(response.participants.length);
+                setParticipant(response.participants);
             })
-    }, [boardService, id]);
+    }, []);
 
     const toggleStatus = (status) => {
         setBoard(board => ({ ...board, isActive: !status }))
@@ -61,17 +61,17 @@ const EditBoard = ({
 
     const onEditHandler = async (e) => {
         e.preventDefault();
-
+        board.participants = participants;
+debugger
         await boardService.edit(board._id, board);
 
         navigate('/content');
     }
 
-    const onparticipantDeleteClick = (id) => {
-        let filteredParticipants = board.participants.filter(p => p._id !== id)
+    const onParticipantDeleteClick = (id) => {
+        let filteredParticipants = participants.filter(p => p._id !== id)
 
-        setBoard(board => ({ ...board, participants: filteredParticipants }));
-        setParticipantsCount(filteredParticipants.length)
+        setParticipant(filteredParticipants);
     }
 
     const onAddParticipantClick = () => {
@@ -85,10 +85,18 @@ const EditBoard = ({
     const addNewParticipant = (e, participant) => {
         e.preventDefault();
 
-        setBoard(board => ({ ...board, participants: [...board.participants, participant] }));
+        let id = generateUUID();
+        participant._id = id;
+        setParticipant(participants => [...participants, participant]);
 
-        setParticipantsCount(board.participants.length)
+        setAddParticipant(false);
     }
+
+    const generateUUID = () => {
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    };
 
     const goBackToAllBoards = () => {
         navigate('/content');
@@ -128,9 +136,9 @@ const EditBoard = ({
                         <div className="input-wrapper">
                             <p><strong>{board.beersCount}</strong></p>
                         </div>
-                        <button id="decreaser" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={decreaseBeerCount}>-</button>
-                        <button id="decreaser" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={resetBeerCount}>Reset</button>
-                        <button id="increaser" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={increaseBeerCount}>+</button>
+                        <button id="decreaser" className={`btn btn-primary ${styles.beerCounterBtns}`} type="button" onClick={decreaseBeerCount}>-</button>
+                        <button id="decreaser" className={`btn btn-primary ${styles.beerCounterResetBtn}`} type="button" onClick={resetBeerCount}>Reset</button>
+                        <button id="increaser" className={`btn btn-primary ${styles.beerCounterBtns}`} type="button" onClick={increaseBeerCount}>+</button>
                         <p className="form-error">Are you serious 'bout that!? :)</p>
                     </div>
 
@@ -147,29 +155,20 @@ const EditBoard = ({
                         <div className="input-wrapper">
                             <input id="description" name="description" type="text" value={board.description ?? ''} onChange={(e) => onDescriptionChange(e)} />
                         </div>
-                        <p className="form-error">
-                            Description should be at least 2 characters long!
-                        </p>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="participants">Participants</label>
                         <i className="fa fa-plus-circle" aria-hidden="true" data-toggle="modal" data-target="#exampleModal" onClick={onAddParticipantClick}></i>
                         <div className="input-wrapper">
-                            {<ul>{board.participants
-                                ? board.participants.map(p =>
+                            {<ul>{participants
+                                ? participants.map(p =>
                                     <li key={p.email}>
                                         <strong>{p.name}</strong>
-                                        <span><i className="fa-solid fa-trash" onClick={() => onparticipantDeleteClick(p._id)}></i></span>
+                                        <i className="fa-solid fa-trash" onClick={() => onParticipantDeleteClick(p._id)}></i>
                                     </li>)
                                 : ''}</ul>}
                         </div>
-                        {participantsCount === 0
-                            ? <p className={styles.formError}>
-                                Participants should be at least 1! :D
-                            </p>
-                            : ''
-                        }
                     </div>
 
                     <div id="form-actions" className={styles.formActions}>
