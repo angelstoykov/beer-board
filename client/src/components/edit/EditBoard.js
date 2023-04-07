@@ -11,7 +11,7 @@ import styles from './EditBoard.module.css';
 const EditBoard = ({
     utils,
 }) => {
-    const { isAuthenticated } = useContext(AuthContext)
+    const { isAuthenticated } = useContext(AuthContext);
 
     const routeParams = useParams();
     const id = routeParams._id;

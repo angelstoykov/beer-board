@@ -38,7 +38,8 @@ a:hover {
 /* Header */
 
 #header {
-	width: 740px;
+	display: flex;
+	width: 800px;
 	height: 160px;
 	margin: 0 auto;
 }
@@ -72,7 +73,7 @@ a:hover {
 
 #navigation {
 	float: right;
-	width: fit-content;
+	width: 500px;
 	height: 50px;
 	margin: 50px 30px 0 0;
 	background: #99CC00;
@@ -162,25 +163,6 @@ a:hover {
 #tagcloud .content a:hover {
 	color: #3399FF;
 }
-
-/* Footer */
-
-#footer {
-	clear: both;
-	width: 200px;
-	margin: 0 auto;
-	padding: 0 520px 0 20px;
-}
-
-#footer p {
-	color: #FFFFFF;
-}
-
-#footer a {
-	color: #FFFFFF;
-}
-
-/* Custom CSS */
 
 div.form {
 	display: block;
