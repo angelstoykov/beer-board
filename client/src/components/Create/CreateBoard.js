@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AddParticipant from '../edit/AddParticipant';
+import AddParticipant from '../Participant/AddParticipant';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -99,9 +99,9 @@ const CreateBoard = ({
                         <div className="input-wrapper">
                             <p name="beersCount"><strong>{beersCount}</strong></p>
                         </div>
-                        <button id="decreaser" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={() => { decreaseBeerCount(); }}>-</button>
-                        <button id="decreaser" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={() => { resetBeerCount(); }}>Reset</button>
-                        <button id="increaser" className={`btn btn-primary ${styles.btnMainMargin}`} type="button" onClick={() => { increaseBeerCount(); }}>+</button>
+                        <button id="decreaser" className={`btn btn-primary ${styles.beerCounterBtns}`} type="button" onClick={() => { decreaseBeerCount(); }}>-</button>
+                        <button id="decreaser" className={`btn btn-primary ${styles.beerCounterResetBtn}`} type="button" onClick={() => { resetBeerCount(); }}>Reset</button>
+                        <button id="increaser" className={`btn btn-primary ${styles.beerCounterBtns}`} type="button" onClick={() => { increaseBeerCount(); }}>+</button>
                     </div>
 
                     <div className="form-group long-line">
@@ -121,14 +121,12 @@ const CreateBoard = ({
                     <div className="form-group">
                         <label htmlFor="participants">Participants</label>
                         <i className="fa fa-plus-circle" aria-hidden="true" data-toggle="modal" data-target="#exampleModal" onClick={onAddParticipantClick}></i>
-                        <div className="input-wrapper">
+                        <div>
                             <ul>{participants.length
                                 ? participants.map(p =>
                                     <li key={p.email}>
-                                        <span>
-                                            <strong>{p.name}</strong>
-                                            <i className="fa-solid fa-trash" onClick={() => onParticipantDeleteClick(p.email)}></i>
-                                        </span>
+                                        <strong>{p.name}</strong>
+                                        <i className="fa-solid fa-trash" onClick={() => onParticipantDeleteClick(p.email)}></i>
                                     </li>)
                                 : ''}</ul>
                         </div>

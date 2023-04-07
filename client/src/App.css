@@ -173,3 +173,8 @@ form {
 	display: inline-block;
 	padding-left: 50%;
 }
+
+.formAddParticipant {
+	display: inline-block;
+	padding-left: 15%;
+}

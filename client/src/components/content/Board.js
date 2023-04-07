@@ -5,11 +5,8 @@ import { Link } from 'react-router-dom';
 const Board = ({
   _id,
   name,
-  isActive,
   beersCount,
   imageSrc,
-  participants,
-  description,
 
 }) => {
   return (
