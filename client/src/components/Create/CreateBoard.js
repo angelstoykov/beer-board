@@ -16,17 +16,15 @@ const CreateBoard = ({
 
     const { isAuthenticated } = useContext(AuthContext)
 
-    const [newBoard, setNewBoard] = useState(boardInitials);
     const [addParticipant, setAddParticipant] = useState(false);
     const [participants, setParticipant] = useState([]);
     const [beersCount, setBeersCount] = useState(0);
     const navigate = useNavigate();
 
-    const onParticipantDeleteClick = (email) => {
-        console.log(email);
-        let filteredParticipants = participants.filter(p => p.email !== email)
-debugger
-        setParticipant([...participants, filteredParticipants ]);
+    const onParticipantDeleteClick = (id) => {
+        let filteredParticipants = participants.filter(p => p._id !== id)
+
+        setParticipant(filteredParticipants);
     }
 
     const goBackToAllBoards = () => {
@@ -35,6 +33,7 @@ debugger
 
     const onAddParticipantClick = () => {
         setAddParticipant(true);
+
     }
 
     const onCloseClick = () => {
@@ -44,8 +43,16 @@ debugger
     const addNewParticipant = (e, participant) => {
         e.preventDefault();
 
+        let id = generateUUID();
+        participant._id = id;
         setParticipant(participants => [...participants, participant]);
     }
+
+    const generateUUID = () => {
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    };
 
     const increaseBeerCount = () => {
         setBeersCount(beersCount => beersCount + 1);
@@ -125,9 +132,9 @@ debugger
                         <div>
                             <ul>{participants.length
                                 ? participants.map(p =>
-                                    <li key={p.email}>
+                                    <li key={p._id}>
                                         <strong>{p.name}</strong>
-                                        <i className="fa-solid fa-trash" onClick={() => onParticipantDeleteClick(p.email)}></i>
+                                        <i className="fa-solid fa-trash" onClick={() => onParticipantDeleteClick(p._id)}></i>
                                     </li>)
                                 : ''}</ul>
                         </div>
