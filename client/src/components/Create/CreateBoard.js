@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AddParticipant from '../Participant/AddParticipant';
+import AddParticipant from '../participant/AddParticipant';
 import { useForm } from '../../hooks/useForm';
 import { AuthContext } from "../../contexts/AuthContext";
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Board from "./Board";
-import CreateBoard from '../Create/CreateBoard';
+import CreateBoard from '../create/CreateBoard';
 
 const Boards = ({
     boards

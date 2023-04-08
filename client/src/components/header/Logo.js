@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import { AuthContext } from "../../contexts/AuthContext";
 
-import Home from '../Home/Home';
+import Home from '../home/Home';
 import Content from '../content/Content';
 
 const Logo = () => {

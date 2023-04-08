@@ -6,12 +6,12 @@ import { authServiceFactory } from './components/services/authService';
 import Content from './components/content/Content';
 import Header from './components/header/Header';
 import BoardDetails from './components/details/BoardDetails';
-import Login from './components/Login/Login';
-import { Logout } from './components/Logout/Logout';
-import Register from './components/Register/Register';
+import Login from './components/login/Login';
+import { Logout } from './components/logout/Logout';
+import Register from './components/register/Register';
 import EditBoard from './components/edit/EditBoard';
 import Contact from './components/contact/Contact';
-import CreateBoard from './components/Create/CreateBoard';
+import CreateBoard from './components/create/CreateBoard';
 
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react';
 import { boardServiceFactory } from './components/services/boardService';
 
 import * as utils from './utils/utils';
-import Home from './components/Home/Home';
+import Home from './components/home/Home';
 
 function App() {
     const [boards, setBoards] = useState([]);

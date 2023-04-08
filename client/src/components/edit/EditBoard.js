@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 
-import AddParticipant from '../Participant/AddParticipant';
+import AddParticipant from '../participant/AddParticipant';
 import { useService } from '../../hooks/useService';
 import { AuthContext } from "../../contexts/AuthContext";
 import { boardServiceFactory } from '../services/boardService';

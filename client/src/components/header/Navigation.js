@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import Contact from '../contact/Contact';
 import Content from '../content/Content';
-import Login from '../Login/Login';
-import { Logout } from '../Logout/Logout'
-import Register from '../Register/Register';
+import Login from '../login/Login';
+import { Logout } from '../logout/Logout'
+import Register from '../register/Register';
 
 import { useContext } from 'react';
 
