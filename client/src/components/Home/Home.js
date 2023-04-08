@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <>
             <div>
-                <img className={styles.centerImg} src='https://www.eatthis.com/wp-content/uploads/sites/4/2022/02/Beer-flight.jpg?quality=82&strip=all' />
+                <img className={styles.centerImg} alt="beer-pic" src='https://www.eatthis.com/wp-content/uploads/sites/4/2022/02/Beer-flight.jpg?quality=82&strip=all' />
             </div>
             <div>
                 <h3 id="home-caption" className="centerh3">

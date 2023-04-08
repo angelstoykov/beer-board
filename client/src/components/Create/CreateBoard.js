@@ -10,10 +10,6 @@ const CreateBoard = ({
     utils,
     onCreateBoardHandler
 }) => {
-    const boardInitials = {
-        isActive: true,
-    }
-
     const { isAuthenticated } = useContext(AuthContext)
 
     const [addParticipant, setAddParticipant] = useState(false);

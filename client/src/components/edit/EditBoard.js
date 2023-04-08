@@ -62,7 +62,7 @@ const EditBoard = ({
     const onEditHandler = async (e) => {
         e.preventDefault();
         board.participants = participants;
-debugger
+
         await boardService.edit(board._id, board);
 
         navigate('/content');
@@ -87,9 +87,11 @@ debugger
 
         let id = generateUUID();
         participant._id = id;
-        setParticipant(participants => [...participants, participant]);
-
-        setAddParticipant(false);
+        if (participants) {
+            setParticipant(participants => [...participants, participant]);
+        } else {
+            setParticipant([participant]);
+        }
     }
 
     const generateUUID = () => {
@@ -104,6 +106,7 @@ debugger
 
     return (
         <>
+        {console.log(participants)}
             {addParticipant && <AddParticipant
                 onCloseClick={onCloseClick}
                 addNewParticipant={addNewParticipant} />}
