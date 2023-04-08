@@ -1,7 +1,7 @@
 body {
 	margin: 20px 0;
 	padding: 0;
-	background: #3399FF url(images/img01.gif) repeat-y center;
+	background: #3399FF url(images/img01.gif) repeat-y center !important;
 	font: normal small "Trebuchet MS", Arial, Helvetica, sans-serif;
 	color: #999999;
 }
@@ -179,6 +179,7 @@ form {
 }
 
 .centerh3 {
-    width: 25%;
-    margin-left: 45%;
+    width: 20%;
+    margin-left: 47%;
+	text-align: justify;
   }

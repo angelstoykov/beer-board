@@ -8,7 +8,10 @@ const Home = () => {
             </div>
             <div>
                 <h3 id="home-caption" className="centerh3">
-                    It is our great pleasure to have you on board! A hearty welcome to you!
+                    It is our great pleasure to have you on board!
+                </h3>
+                <h3 className="centerh3">
+                    A hearty welcome to you!
                 </h3>
             </div>
         </>
