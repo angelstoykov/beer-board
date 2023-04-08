@@ -7,7 +7,7 @@ const Boards = ({
 }) => {
     return (
         <div id="boards">
-            <Link to="/create-board" element={<CreateBoard />}><button>Create Board</button></Link>
+            <Link to="/create-board" element={<CreateBoard />}><button className="btn btn-success">Create Board</button></Link>
             {boards?.map(x => <Board key={x._id} {...x} />)}
 
             {boards?.length === 0 && (

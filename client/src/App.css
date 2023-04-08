@@ -76,6 +76,7 @@ a:hover {
 	height: 50px;
 	margin: 50px 30px 0 0;
 	background: #99CC00;
+	border-radius: 10px;
 }
 
 #navigation ul {
